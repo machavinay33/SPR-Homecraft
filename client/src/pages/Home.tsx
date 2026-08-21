@@ -1,6 +1,6 @@
 /* Forest Atelier page: deep forest atmosphere, warm ivory breathing room, restrained champagne cues, editorial asymmetry. */
 import { useEffect, useMemo, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronRight, Menu, Play, X } from "lucide-react";
+import { ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronRight, Instagram, Menu, Phone, Play, X } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 
@@ -164,10 +164,10 @@ export default function Home() {
 
       <section className="reel-section section-pad" id="gallery"><div className="reel-heading"><p className="eyebrow">A CLOSER LOOK</p><h2>See it<br /><em>come together.</em></h2><p>Real spaces. Real materials. A glimpse into the details that make a piece feel like yours.</p></div><div className="video-reel">{videos.map((video, index) => <div className="video-tile" key={video}><video src={video} muted loop autoPlay playsInline /><div className="video-top"><span>0{index + 1}</span><span>SPR / REEL</span></div><span className="play-mark"><Play size={14} fill="currentColor" /></span></div>)}</div></section>
 
-      <section className="contact-section"><div className="contact-mark"><img src={logo} alt="SPR Homecraft" /></div><div><p className="eyebrow eyebrow--gold">YOUR SPACE, NEXT</p><h2>Let’s make<br /><em>room for more.</em></h2><p>Tell us what you’re imagining. We’ll help you find the shape, material and finish to make it real.</p><button className="button button--gold" onClick={openQuote}>BOOK A CONSULTATION <ArrowUpRight size={17} /></button></div></section>
+      <section className="contact-section"><div className="contact-mark"><img src={logo} alt="SPR Homecraft" /></div><div><p className="eyebrow eyebrow--gold">YOUR SPACE, NEXT</p><h2>Let’s make<br /><em>room for more.</em></h2><p>Tell us what you’re imagining. We’ll help you find the shape, material and finish to make it real.</p><button className="button button--gold" onClick={openQuote}>BOOK A CONSULTATION <ArrowUpRight size={17} /></button><div className="contact-links"><a href="tel:+919666687123"><Phone size={15} /> +91 96666 87123</a><a href="https://www.instagram.com/spr.homecrafts?igsi=a3NzanN4ZWVmczd2" target="_blank" rel="noreferrer"><Instagram size={15} /> @spr.homecrafts</a></div></div></section>
     </main>
 
-    <footer className="site-footer"><Logo compact /><p>Premium customised furniture<br />designed in Hyderabad.</p><div className="footer-links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#gallery">Gallery</a><a href="mailto:hello@sprhomecraft.com">Email us</a></div><span className="copyright">© 2026 SPR HOMECRAFT</span></footer>
+    <footer className="site-footer"><Logo compact /><p>Premium customised furniture<br />designed in Hyderabad.</p><div className="footer-links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#gallery">Gallery</a><a href="tel:+919666687123">+91 96666 87123</a><a href="https://www.instagram.com/spr.homecrafts?igsi=a3NzanN4ZWVmczd2" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:hello@sprhomecraft.com">Email us</a></div><span className="copyright">© 2026 SPR HOMECRAFT</span></footer>
     <EnquiryDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
   </div>;
 }
