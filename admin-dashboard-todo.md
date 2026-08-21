@@ -28,3 +28,11 @@
 - [x] Add Unit 1 Sai Nagar Colony, Badnaipet, Hyderabad with its Google Maps link.
 - [x] Add Unit 2 Nadargul, Telangana with its Google Maps link.
 - [x] Verify the production build and push the location update for Netlify.
+
+## Contact and Motion Refinement
+
+- [x] Make the phone number and Instagram handle prominent and consistently visible.
+- [x] Add scroll-triggered section reveal animations with staggered content.
+- [x] Add subtle image lift, hover depth, and media reveal effects.
+- [x] Respect prefers-reduced-motion and verify the production build.
+- [x] Push the refinement update to GitHub for Netlify deployment.
