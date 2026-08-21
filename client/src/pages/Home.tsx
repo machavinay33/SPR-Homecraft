@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronRight, Menu, Play, X } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 const logo = "/assets/brand/spr-homecraft-logo.png";
 const img = {
@@ -51,6 +52,7 @@ function Logo({ compact = false }: { compact?: boolean }) {
 
 function EnquiryDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   if (!open) return null;
   return (
     <div className="drawer-backdrop" role="dialog" aria-modal="true" aria-label="Request a quote">
@@ -60,11 +62,20 @@ function EnquiryDrawer({ open, onClose }: { open: boolean; onClose: () => void }
           <p className="eyebrow">BEGIN A CONVERSATION</p>
           <h2>Bring us the room.<br /><em>We’ll shape what comes next.</em></h2>
           <p className="drawer-intro">Tell us a little about your space, and our design team will be in touch from Hyderabad.</p>
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
-            <label>Name<input required placeholder="Your name" /></label>
-            <label>Email or phone<input required placeholder="How should we reach you?" /></label>
-            <label>What are you imagining?<textarea rows={3} placeholder="A sectional sofa, a full living room, something in between..." /></label>
-            <button className="button button--gold" type="submit">SEND ENQUIRY <ArrowUpRight size={16} /></button>
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            if (!supabase) { toast.error("Enquiries are not configured yet."); return; }
+            setSubmitting(true);
+            const data = new FormData(e.currentTarget);
+            const result = await supabase.from("enquiries").insert({ name: String(data.get("name") ?? ""), email: String(data.get("email") ?? ""), phone: String(data.get("phone") ?? "") || null, message: String(data.get("message") ?? ""), status: "new" });
+            if (result.error) toast.error(result.error.message); else setSent(true);
+            setSubmitting(false);
+          }}>
+            <label>Name<input name="name" required placeholder="Your name" /></label>
+            <label>Email<input name="email" type="email" required placeholder="you@example.com" /></label>
+            <label>Phone (optional)<input name="phone" placeholder="+91 …" /></label>
+            <label>What are you imagining?<textarea name="message" rows={3} required placeholder="A sectional sofa, a full living room, something in between..." /></label>
+            <button className="button button--gold" type="submit" disabled={submitting}>{submitting ? "SENDING…" : "SEND ENQUIRY"} <ArrowUpRight size={16} /></button>
           </form>
         </> : <div className="sent-state"><span className="sent-icon"><Check /></span><p className="eyebrow">ENQUIRY RECEIVED</p><h2>Thank you.<br /><em>We’ll be in touch.</em></h2><p>Our team will review your note and reach out shortly.</p><button className="button button--outline" onClick={onClose}>BACK TO SHOWROOM</button></div>}
       </div>
