@@ -36,3 +36,10 @@
 - [x] Add subtle image lift, hover depth, and media reveal effects.
 - [x] Respect prefers-reduced-motion and verify the production build.
 - [x] Push the refinement update to GitHub for Netlify deployment.
+
+## Video Playback Compatibility Fix
+
+- [x] Inspect deployed video responses and local video codecs.
+- [x] Confirm all video paths resolve and add browser-compatible fallback handling.
+- [x] Add poster/fallback imagery so tiles never appear blank.
+- [x] Verify on the production build and push the fix to GitHub.
